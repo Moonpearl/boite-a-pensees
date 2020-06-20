@@ -1,33 +1,44 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Container } from 'react-bootstrap';
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { MdHome } from 'react-icons/md';
 
-const Styles = {
-  Header: styled.header`
-    color: white;
-    background-color: rebeccapurple;
-    padding: 1.5rem;
+const useStyles = makeStyles({
+  icon: {
+    color: 'white',
 
-    & a {
-      color: inherit;
-      text-decoration: none;
-    }
-  `,
-};
+    '&:hover': {
+      color: 'white',
+    },
+  },
+});
 
-const Header = ({ siteTitle }) =>
-  <Styles.Header>
-    <Container>
-      <h1>
-        <Link to="/">
+const Header = ({ siteTitle }) => {
+  const styles = useStyles();
+
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton
+          edge="start"
+          color="#inherit"
+        >
+          <Link
+            to='/'
+            className={styles.icon}
+          >
+            <MdHome />
+          </Link>
+        </IconButton>
+        <Typography variant="h6">
           {siteTitle}
-        </Link>
-      </h1>
-    </Container>
-  </Styles.Header>
-;
+        </Typography>
+      </Toolbar>
+    </AppBar>
+  );
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,
