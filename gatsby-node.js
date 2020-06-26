@@ -8,12 +8,11 @@ const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 const data = [
-  // { entityName: 'allDatoCmsEntity', uri: 'entities', template: 'entity.jsx' },
+  { entityName: 'allDatoCmsPerson', uri: 'person', template: 'person.jsx' },
 ];
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
-  const pageNumbers = [2, 3, 4];
 
   return new Promise(async (resolve, reject) => {
     for (let instance of data) {
@@ -41,17 +40,6 @@ exports.createPages = ({ graphql, actions }) => {
         })
       });
     }
-  
-    pageNumbers.map( (pageNumber, index) =>
-      createPage({
-        path: `pages/${pageNumber}`,
-        component: path.resolve(`./src/templates/page.jsx`),
-        context: {
-          pageNumber,
-          nextPage: index === pageNumbers.length - 1 ? null : `pages/${pageNumber + 1}`,
-        },
-      })
-    );
     resolve();
   });
 }
